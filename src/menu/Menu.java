@@ -26,16 +26,15 @@ public class Menu implements Runnable {
         }
     }
 
-    private final List<Entry> menu;
+    private final List<Entry> menu = new ArrayList<>();
     private boolean once;
     private String title;
 
     public Menu() {
-        this("");
+        title = "";
     }
 
     public Menu(final String title) {
-        menu = new ArrayList<>();
         this.title = String.format("%n%s%n", title);
     }
 
