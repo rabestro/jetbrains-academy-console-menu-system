@@ -1,14 +1,12 @@
 package menu;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.util.Objects.checkIndex;
-
 public class Menu implements Runnable {
 
-    public static class Entry  implements Runnable {
+    public static class Entry implements Runnable {
         private final String name;
         private final Runnable action;
 
@@ -29,10 +27,11 @@ public class Menu implements Runnable {
     }
 
     private final String title;
-    private final List<Entry> menu = new LinkedList<>();
+    private final List<Entry> menu;
 
     public Menu(final String title) {
-        this.title = title;
+        menu = new ArrayList<>();
+        this.title = String.format("%n%s%n", title);
     }
 
     public Menu add(final String entry, final Runnable action) {
@@ -47,11 +46,10 @@ public class Menu implements Runnable {
             menu.forEach(System.out::println);
             System.out.println("0. Exit");
             try {
-                int choice = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
+                final int choice = Integer.parseInt(new Scanner(System.in).nextLine()) - 1;
                 if (choice == -1) {
                     return;
                 }
-                checkIndex(choice, menu.size());
                 menu.get(choice).run();
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Please enter the number from 0 up to " + menu.size());
