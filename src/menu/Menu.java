@@ -26,12 +26,22 @@ public class Menu implements Runnable {
         }
     }
 
-    private final String title;
     private final List<Entry> menu;
+    private boolean once;
+    private String title;
+
+    public Menu() {
+        this("");
+    }
 
     public Menu(final String title) {
         menu = new ArrayList<>();
         this.title = String.format("%n%s%n", title);
+    }
+
+    public Menu once() {
+        once = true;
+        return this;
     }
 
     public Menu add(final String entry, final Runnable action) {
@@ -41,7 +51,7 @@ public class Menu implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        do {
             System.out.println(title);
             menu.forEach(System.out::println);
             System.out.println("0. Exit");
@@ -54,6 +64,6 @@ public class Menu implements Runnable {
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Please enter the number from 0 up to " + menu.size());
             }
-        }
+        } while (!once);
     }
 }

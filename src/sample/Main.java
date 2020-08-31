@@ -15,8 +15,7 @@ public class Main {
                         .add("The sub-menu entry", new SomeTask())
                         .add("A simple sub-menu task", () -> System.out.println("A simple task"))
                         .add("First Task in Big Class", bigClass::firstTask)
-                        .add("Second Task in Big Class", bigClass::secondTask)
-                )
+                        .add("Second Task in Big Class", bigClass::secondTask))
                 .run();
     }
 
