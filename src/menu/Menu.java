@@ -44,7 +44,7 @@ public class Menu implements Runnable {
     }
 
     public Menu add(final String entry, final Runnable action) {
-        menu.add(new Entry(menu.size() + 1 + ". " + entry, action));
+        menu.add(new Entry(String.format("%2d. %s", menu.size() + 1, entry), action));
         return this;
     }
 
