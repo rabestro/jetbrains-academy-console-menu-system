@@ -6,7 +6,7 @@ A simple class for building menus for console applications.This class was design
 
 ```java
     public static void main(String[] args) {
-        final var bigClass = new BigClass("Some Configuration");
+        final var bigClass = new BigClass("Some big class with methods to call");
 
         new SimpleMenu("What do you want to do:")
                 .add("Play the guessing game", new Game("Guessing Game"))
