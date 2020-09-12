@@ -14,6 +14,7 @@ public class BigClass {
         System.out.println("Running first task in Big Class with " + config);
         System.out.println("This task launched " + ++firstCounter + " times.");
     }
+
     public void secondTask() {
         secondCounter++;
         System.out.println("Running second task in Big Class with " + config);
