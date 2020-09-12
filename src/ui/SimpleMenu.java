@@ -13,7 +13,7 @@ public class SimpleMenu implements Menu {
 
     private boolean isOnlyOnce;
 
-    SimpleMenu(String title) {
+    public SimpleMenu(String title) {
         set(Property.TITLE, title);
         set(Property.ERROR, "Please enter the number from 0 up to {0}");
         set(Property.FORMAT, "{0}. {1}");
