@@ -16,7 +16,14 @@ A simple class for building menus for console applications.This class was design
                         .add("The sub-menu entry", new SomeTask())
                         .add("A simple sub-menu task", () -> System.out.println("A simple task"))
                         .add("First Task in Big Class", bigClass::firstTask)
-                        .add("Second Task in Big Class", bigClass::secondTask))
+                        .add("Second Task in Big Class", bigClass::secondTask)
+                        .add("One more sub-menu", new SimpleMenu("Select file format:")
+                                .add("J", "JSON", () -> bigClass.select("JSON"))
+                                .add("X", "XML", () -> bigClass.select("XML"))
+                                .add("Y", "YAML", () -> bigClass.select("YAML"))
+                                .onlyOnce())
+                        .addExit("Back"))
+                .addExit()
                 .run();
     }
 ```
