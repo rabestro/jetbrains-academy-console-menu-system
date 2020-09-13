@@ -14,6 +14,14 @@ public class Menu implements Runnable {
 
     protected boolean isOnlyOnce;
 
+    public Menu() {
+
+    }
+
+    public Menu(String title) {
+        set(Property.TITLE, title);
+    }
+
     public Menu set(Property key, String value) {
         properties.put(key, value);
         return this;

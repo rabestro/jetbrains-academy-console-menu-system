@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         final var bigClass = new BigClass("Some Configuration");
 
-        new Menu()
+        new Menu("The Main Menu")
                 .add("Play the guessing game", new Game("Guessing Game"))
                 .add("Play the sudoku", new Game("Sudoku"))
                 .add("Search for an animal", Main::searchAnimal)
