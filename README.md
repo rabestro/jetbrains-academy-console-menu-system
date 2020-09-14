@@ -49,8 +49,5 @@ public class Main {
 
 ## UML Diagrams
 
-![Package ui](ui-uml.png)
+![Package ui](uml/ui.png)
 
-### Dependencies
-
-![Dependencies](package_ui_uml_diagram.png)
