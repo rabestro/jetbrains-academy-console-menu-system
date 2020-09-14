@@ -47,3 +47,10 @@ public class Main {
 - ConsoleMenu - implementation of Menu interface based on ConsoleUI
 - LocalMenu - implementation based on LocalUI. 
 
+## UML Diagrams
+
+![Package ui](ui-uml.png)
+
+### Dependencies
+
+![Dependencies](package_ui_uml_diagram.png)
