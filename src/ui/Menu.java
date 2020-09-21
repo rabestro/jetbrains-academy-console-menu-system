@@ -42,7 +42,7 @@ public class Menu implements Runnable {
     }
 
     public Menu addExit() {
-        menu.put(get(Property.EXIT), new MenuEntry(get(Property.EXIT), this::onlyOnce));
+        menu.put(get(Property.EXIT_KEY), new MenuEntry(get(Property.EXIT), this::onlyOnce));
         return this;
     }
 
