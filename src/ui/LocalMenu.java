@@ -18,11 +18,11 @@ public class LocalMenu extends ConsoleMenu {
         }
     }
 
-    public Menu add(String key, String description, Runnable action) {
+    public SimpleMenu add(String key, String description, Runnable action) {
         return super.add(key, bundle.getString(description), action);
     }
 
-    public Menu add(String description, Runnable action) {
+    public SimpleMenu add(String description, Runnable action) {
         return super.add(String.valueOf(menu.size() + 1), bundle.getString(description), action);
     }
 

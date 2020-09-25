@@ -1,19 +1,19 @@
 package sample;
 
-import ui.Menu;
+import ui.SimpleMenu;
 
 public class Main {
 
     public static void main(String[] args) {
         final var bigClass = new BigClass("Some Configuration");
 
-        new Menu("The Main Menu")
+        new SimpleMenu("The Main Menu")
                 .add("Play the guessing game", new Game("Guessing Game"))
                 .add("Play the sudoku", new Game("Sudoku"))
                 .add("Search for an animal", Main::searchAnimal)
-                .add("Entering Submenu", new Menu().onlyOnce()
-                        .set(Menu.Property.TITLE, "--- Sub-Menu Title ---")
-                        .set(Menu.Property.EXIT, "Back to main menu")
+                .add("One-time Submenu", new SimpleMenu().onlyOnce()
+                        .set(SimpleMenu.Property.TITLE, "--- Sub-Menu Title ---")
+                        .set(SimpleMenu.Property.EXIT, "Back to main menu")
                         .add("The sub-menu entry", new SomeTask())
                         .add("A simple sub-menu task", () -> System.out.println("A simple task"))
                         .add("First Task in Big Class", bigClass::firstTask)

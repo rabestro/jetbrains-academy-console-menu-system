@@ -1,11 +1,6 @@
 package ui;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-public class ConsoleMenu extends Menu {
-
-    private final Map<Property, String> properties = new EnumMap<>(Property.class);
+public class ConsoleMenu extends SimpleMenu {
 
     private final UI ui;
 

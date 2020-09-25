@@ -1,73 +1,87 @@
 package ui;
 
-import java.util.EnumMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+/**
+ * An interface for a simple menu system for console applications.
+ *
+ */
+public interface Menu extends Runnable {
 
-import static java.text.MessageFormat.format;
+    /**
+     * Set additional property for the menu.
+     *
+     * @param property
+     * @param value
+     * @return this menu
+     */
+    Menu set(Property property, String value);
 
-public class Menu implements Runnable {
+    /**
+     * Add new menu entry with key, description and action
+     *
+     * @param key
+     * @param description
+     * @param action
+     * @return this menu
+     */
+    Menu add(String key, String description, Runnable action);
 
-    protected final Map<String, MenuEntry> menu = new LinkedHashMap<>();
-    private final Map<Property, String> properties = new EnumMap<>(Property.class);
+    /**
+     * Add new menu entry with description and action.
+     * The key will be number from 1 (menu.size + 1)
+     *
+     * @param description
+     * @param action
+     * @return
+     */
+    Menu add(String description, Runnable action);
 
-    protected boolean isOnlyOnce;
+    /**
+     * Disable last added menu entry.
+     *
+     * @return this menu
+     */
+    Menu disable();
 
-    public Menu() {
+    /**
+     * Disable menu entry with specified key
+     *
+     * @param key
+     * @return this menu
+     */
+    Menu disable(String key);
 
-    }
+    /**
+     * Enable menu entry with specified key
+     *
+     * @param key
+     * @return this menu
+     */
+    Menu enable(String key);
 
-    public Menu(String title) {
-        set(Property.TITLE, title);
-    }
+    /**
+     * The menu should be finished after executing any menu entry
+     *
+     * @return this menu
+     */
+    Menu onlyOnce();
 
-    public Menu set(Property key, String value) {
-        properties.put(key, value);
-        return this;
-    }
+    /**
+     * Add the exit entry to the menu.
+     *
+     * The key is specified in Property.EXIT_KEY
+     * The description is specified in Property.EXIT
+     *
+     * If you would like to change default properties
+     * you should do this with set method before addExit.
+     *
+     * @return
+     */
+    Menu addExit();
 
-    public Menu add(String key, String description, Runnable action) {
-        menu.put(key, new MenuEntry(description, action));
-        return this;
-    }
-
-    public Menu add(String description, Runnable action) {
-        return this.add(String.valueOf(menu.size() + 1), description, action);
-    }
-
-    public Menu onlyOnce() {
-        isOnlyOnce = true;
-        return this;
-    }
-
-    public Menu addExit() {
-        menu.put(get(Property.EXIT_KEY), new MenuEntry(get(Property.EXIT), this::onlyOnce));
-        return this;
-    }
-
-    @Override
-    public void run() {
-        do {
-            System.out.println();
-            System.out.println(get(Property.TITLE));
-            menu.forEach((key, entry) -> System.out.println(format(get(Property.FORMAT), key, entry)));
-            final var key = new Scanner(System.in).nextLine().toLowerCase();
-            System.out.println();
-            menu.getOrDefault(key, new MenuEntry("Error",
-                    () -> System.out.println(format(get(Property.ERROR), menu.size())))
-            ).run();
-        } while (!isOnlyOnce);
-    }
-
-    protected String get(Property property) {
-        return properties.getOrDefault(property, property.getValue());
-    }
-
-    public enum Property {
+    enum Property {
         TITLE("Choose your action:"),
         FORMAT("{0}. {1}"),
-        ERROR("Please enter the number from 0 up to {0}"),
+        ERROR("Please enter the number from 1 to {0} or 0 for exit."),
         EXIT("Exit"),
         EXIT_KEY("0");
 
@@ -82,25 +96,4 @@ public class Menu implements Runnable {
         }
     }
 
-    protected static final class MenuEntry implements Runnable {
-        private final String description;
-        private final Runnable action;
-
-        MenuEntry(final String description, final Runnable action) {
-            this.description = description;
-            this.action = action;
-        }
-
-        @Override
-        public String toString() {
-            return description;
-        }
-
-        @Override
-        public void run() {
-            action.run();
-        }
-    }
-
 }
-
