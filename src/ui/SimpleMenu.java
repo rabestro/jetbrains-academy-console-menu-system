@@ -87,14 +87,14 @@ public class SimpleMenu implements Menu {
         } while (!isOnlyOnce);
     }
 
-    protected String get(Property property) {
+    String get(Property property) {
         return properties.getOrDefault(property, property.getValue());
     }
 
-    protected static final class MenuEntry implements Runnable {
+    static final class MenuEntry implements Runnable {
         private final String description;
         private final Runnable action;
-        private boolean isEnabled = true;
+        boolean isEnabled = true;
 
         MenuEntry(final String description, final Runnable action) {
             this.description = description;

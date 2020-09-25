@@ -2,7 +2,6 @@ package ui;
 
 /**
  * An interface for a simple menu system for console applications.
- *
  */
 public interface Menu extends Runnable {
 
@@ -67,14 +66,14 @@ public interface Menu extends Runnable {
 
     /**
      * Add the exit entry to the menu.
-     *
+     * <p>
      * The key is specified in Property.EXIT_KEY
      * The description is specified in Property.EXIT
-     *
+     * <p>
      * If you would like to change default properties
      * you should do this with set method before addExit.
      *
-     * @return
+     * @return this menu
      */
     Menu addExit();
 

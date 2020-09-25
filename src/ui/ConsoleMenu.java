@@ -18,7 +18,11 @@ public class ConsoleMenu extends SimpleMenu {
         do {
             ui.println("");
             ui.println(get(Property.TITLE));
-            menu.forEach((key, entry) -> ui.println(get(Property.FORMAT), key, entry));
+            menu.forEach((key, entry) -> {
+                if (entry.isEnabled) {
+                    ui.println(get(Property.FORMAT), key, entry);
+                }
+            });
             final var key = ui.readLine().toLowerCase();
             ui.println("");
             menu.getOrDefault(key, new MenuEntry("Error",
