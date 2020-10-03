@@ -11,8 +11,10 @@ public class SimpleMenu implements Menu {
 
     protected final Map<String, MenuEntry> menu = new LinkedHashMap<>();
     protected final Map<Property, String> properties = new EnumMap<>(Property.class);
-
+    protected MenuEntry defaultEntry = new MenuEntry("Incorrect option",
+            () -> System.out.println(format(get(Property.ERROR), menu.size())));
     protected boolean isOnlyOnce;
+    protected Scanner scanner = new Scanner(System.in);
 
     public SimpleMenu() {
 
@@ -79,11 +81,9 @@ public class SimpleMenu implements Menu {
                     System.out.println(format(get(Property.FORMAT), key, entry));
                 }
             });
-            final var key = new Scanner(System.in).nextLine().toLowerCase();
+            final var key = scanner.nextLine().toLowerCase();
             System.out.println();
-            menu.getOrDefault(key, new MenuEntry("Error",
-                    () -> System.out.println(format(get(Property.ERROR), menu.size())))
-            ).run();
+            menu.getOrDefault(key, defaultEntry).run();
         } while (!isOnlyOnce);
     }
 
