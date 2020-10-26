@@ -10,8 +10,8 @@ public interface UI {
 
     BigDecimal readNumber();
 
-    SimpleMenu menu();
+    Menu menu();
 
-    SimpleMenu menu(String title);
+    Menu menu(String title);
 
 }

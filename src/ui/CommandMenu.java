@@ -1,6 +1,6 @@
 package ui;
 
-public class CommandMenu extends SimpleMenu {
+public class CommandMenu extends Menu.SimpleMenu {
     public CommandMenu() {
         set(Property.EXIT_KEY, "exit");
     }

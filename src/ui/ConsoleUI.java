@@ -27,12 +27,12 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public SimpleMenu menu() {
+    public Menu menu() {
         return new ConsoleMenu(this);
     }
 
     @Override
-    public SimpleMenu menu(String title) {
+    public Menu menu(String title) {
         return new ConsoleMenu(this, title);
     }
 }

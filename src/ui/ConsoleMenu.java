@@ -1,6 +1,6 @@
 package ui;
 
-public class ConsoleMenu extends SimpleMenu {
+public class ConsoleMenu extends Menu.SimpleMenu {
 
     private final UI ui;
 
