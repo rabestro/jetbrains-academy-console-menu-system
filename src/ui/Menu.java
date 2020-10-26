@@ -1,3 +1,9 @@
+/**
+ * A universal system for building console menus for JetBrains Academy projects.
+ *
+ * @author Jegors Čemisovs
+ */
+
 package ui;
 
 import java.util.EnumMap;
@@ -8,7 +14,7 @@ import java.util.Scanner;
 import static java.text.MessageFormat.format;
 
 /**
- * An interface for a simple menu system for console applications.
+ * An interface for a simple menu system.
  */
 public interface Menu extends Runnable {
 
@@ -88,8 +94,8 @@ public interface Menu extends Runnable {
         return new SimpleMenu();
     }
 
-    static Menu create(String text) {
-        return new SimpleMenu(text);
+    static Menu create(String title) {
+        return new SimpleMenu().set(Property.TITLE, title);
     }
 
     enum Property {
@@ -110,6 +116,9 @@ public interface Menu extends Runnable {
         }
     }
 
+    /**
+     * A default implementation of the Menu System
+     */
     class SimpleMenu implements Menu {
 
         protected final Map<String, MenuEntry> menu = new LinkedHashMap<>();
@@ -118,14 +127,6 @@ public interface Menu extends Runnable {
                 () -> System.out.println(format(get(Property.ERROR), menu.size())));
         protected boolean isOnlyOnce;
         protected Scanner scanner = new Scanner(System.in);
-
-        public SimpleMenu() {
-
-        }
-
-        public SimpleMenu(String title) {
-            set(Property.TITLE, title);
-        }
 
         @Override
         public SimpleMenu set(Property property, String value) {
