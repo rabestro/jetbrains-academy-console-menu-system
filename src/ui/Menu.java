@@ -1,28 +1,26 @@
-/**
- * A universal system for building console menus for JetBrains Academy projects.
- *
- * @author Jegors Čemisovs
- */
+/*
+  A universal console menu system for JetBrains Academy projects.
 
+  @author Jegors Čemisovs
+ */
 package ui;
 
+import java.text.MessageFormat;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.text.MessageFormat.format;
-
 /**
- * An interface for a simple menu system.
+ * An interface for a console menu system.
  */
 public interface Menu extends Runnable {
 
     /**
      * Set additional property for the menu.
      *
-     * @param property
-     * @param value
+     * @param property to set
+     * @param value for the property
      * @return this menu
      */
     Menu set(Property property, String value);
@@ -30,9 +28,9 @@ public interface Menu extends Runnable {
     /**
      * Add new menu entry with key, description and action
      *
-     * @param key
-     * @param description
-     * @param action
+     * @param key of menu entry, should be a digit, a letter or a keyword.
+     * @param description of menu entry.
+     * @param action is an object implemented Runnable interface.
      * @return this menu
      */
     Menu add(String key, String description, Runnable action);
@@ -41,9 +39,9 @@ public interface Menu extends Runnable {
      * Add new menu entry with description and action.
      * The key will be number from 1 (menu.size + 1)
      *
-     * @param description
-     * @param action
-     * @return
+     * @param description of menu entry
+     * @param action is an object implemented Runnable interface.
+     * @return this menu
      */
     Menu add(String description, Runnable action);
 
@@ -57,7 +55,7 @@ public interface Menu extends Runnable {
     /**
      * Disable menu entry with specified key
      *
-     * @param key
+     * @param key for the menu entry to disable.
      * @return this menu
      */
     Menu disable(String key);
@@ -65,7 +63,7 @@ public interface Menu extends Runnable {
     /**
      * Enable menu entry with specified key
      *
-     * @param key
+     * @param key for the menu entry to enable.
      * @return this menu
      */
     Menu enable(String key);
@@ -124,7 +122,7 @@ public interface Menu extends Runnable {
         protected final Map<String, MenuEntry> menu = new LinkedHashMap<>();
         protected final Map<Property, String> properties = new EnumMap<>(Property.class);
         protected MenuEntry defaultEntry = new MenuEntry("Incorrect option",
-                () -> System.out.println(format(get(Property.ERROR), menu.size())));
+                () -> System.out.println(MessageFormat.format(get(Property.ERROR), menu.size())));
         protected boolean isOnlyOnce;
         protected Scanner scanner = new Scanner(System.in);
 
@@ -182,7 +180,7 @@ public interface Menu extends Runnable {
                 System.out.println(get(Property.TITLE));
                 menu.forEach((key, entry) -> {
                     if (entry.isEnabled) {
-                        System.out.println(format(get(Property.FORMAT), key, entry));
+                        System.out.println(MessageFormat.format(get(Property.FORMAT), key, entry));
                     }
                 });
                 final var key = scanner.nextLine().toLowerCase();
