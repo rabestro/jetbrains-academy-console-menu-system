@@ -120,13 +120,12 @@ public interface Menu extends Runnable {
      * A default Menu implementation
      */
     class SimpleMenu implements Menu {
-
+        protected final Scanner scanner = new Scanner(System.in);
         protected final Map<String, MenuEntry> menu = new LinkedHashMap<>();
         protected final Map<Property, String> properties = new EnumMap<>(Property.class);
         protected MenuEntry defaultEntry = new MenuEntry("Incorrect option",
                 () -> System.out.println(MessageFormat.format(get(Property.ERROR), menu.size())));
         protected boolean isOnlyOnce;
-        protected Scanner scanner = new Scanner(System.in);
 
         @Override
         public SimpleMenu set(Property property, String value) {
@@ -221,8 +220,7 @@ public interface Menu extends Runnable {
      * Internalized Menu implementation
      */
     class LocalMenu extends SimpleMenu {
-
-        private final ResourceBundle bundle;
+        protected final ResourceBundle bundle;
 
         public LocalMenu(ResourceBundle bundle) {
             super();
