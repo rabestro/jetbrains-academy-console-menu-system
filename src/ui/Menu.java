@@ -2,6 +2,8 @@
   A universal console menu system for JetBrains Academy projects.
 
   @author Jegors Čemisovs
+  @date 2020
+  @link https://github.com/rabestro/jetbrains-academy-console-menu-system
  */
 package ui;
 
