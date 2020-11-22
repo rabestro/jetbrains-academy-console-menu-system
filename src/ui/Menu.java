@@ -6,10 +6,7 @@
 package ui;
 
 import java.text.MessageFormat;
-import java.util.EnumMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * An interface for a console menu system.
@@ -20,7 +17,7 @@ public interface Menu extends Runnable {
      * Set additional property for the menu.
      *
      * @param property to set
-     * @param value for the property
+     * @param value    for the property
      * @return this menu
      */
     Menu set(Property property, String value);
@@ -28,9 +25,9 @@ public interface Menu extends Runnable {
     /**
      * Add new menu entry with key, description and action
      *
-     * @param key of menu entry, should be a digit, a letter or a keyword.
+     * @param key         of menu entry, should be a digit, a letter or a keyword.
      * @param description of menu entry.
-     * @param action is an object implemented Runnable interface.
+     * @param action      is an object implemented Runnable interface.
      * @return this menu
      */
     Menu add(String key, String description, Runnable action);
@@ -40,7 +37,7 @@ public interface Menu extends Runnable {
      * The key will be number from 1 (menu.size + 1)
      *
      * @param description of menu entry
-     * @param action is an object implemented Runnable interface.
+     * @param action      is an object implemented Runnable interface.
      * @return this menu
      */
     Menu add(String description, Runnable action);
@@ -94,6 +91,10 @@ public interface Menu extends Runnable {
 
     static Menu create(String title) {
         return new SimpleMenu().set(Property.TITLE, title);
+    }
+
+    static Menu create(ResourceBundle resourceBundle) {
+        return new LocalMenu(resourceBundle);
     }
 
     enum Property {
@@ -213,5 +214,31 @@ public interface Menu extends Runnable {
                 action.run();
             }
         }
+    }
+
+    class LocalMenu extends SimpleMenu {
+
+        private final ResourceBundle bundle;
+
+        public LocalMenu(ResourceBundle bundle) {
+            super();
+            this.bundle = bundle;
+
+            for (var property : Property.values()) {
+                var key = "menu." + property.name().toLowerCase();
+                if (bundle.containsKey(key)) {
+                    set(property, bundle.getString(key));
+                }
+            }
+        }
+
+        public SimpleMenu add(String key, String description, Runnable action) {
+            return super.add(key, bundle.getString(description), action);
+        }
+
+        public SimpleMenu add(String description, Runnable action) {
+            return super.add(String.valueOf(menu.size() + 1), bundle.getString(description), action);
+        }
+
     }
 }
