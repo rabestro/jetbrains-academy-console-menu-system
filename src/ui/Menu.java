@@ -1,9 +1,8 @@
 /*
   A universal console menu system for JetBrains Academy projects.
+  https://github.com/rabestro/jetbrains-academy-console-menu-system
 
   @author Jegors Čemisovs
-  @date 2020
-  @link https://github.com/rabestro/jetbrains-academy-console-menu-system
  */
 package ui;
 
@@ -118,7 +117,7 @@ public interface Menu extends Runnable {
     }
 
     /**
-     * A default implementation of the Menu System
+     * A default Menu implementation
      */
     class SimpleMenu implements Menu {
 
@@ -218,6 +217,9 @@ public interface Menu extends Runnable {
         }
     }
 
+    /**
+     * Internalized Menu implementation
+     */
     class LocalMenu extends SimpleMenu {
 
         private final ResourceBundle bundle;
